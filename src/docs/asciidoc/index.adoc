@@ -6,6 +6,35 @@ Jorge Aguilera <jorge.aguilera@puravida-software.com>
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../java]
 
+== Presentation template
+
+* Plantilla para descargar y empezar a escribir una presentación html
+* Olvidate de PowerPoint
+* Añade diagramas y/o fórmulas LaTex
+* Sólo necesitas Java (y si usas Gitlab o Github ni eso)
+
+== Instrucciones (flecha abajo)
+
+=== Descargar
+
+* Descargar desde https://gitlab.com/jorge-aguilera/presentation-template/-/archive/master/presentation-template-master.zip
+* Descomprimir 
+
+=== Editar
+
+* Abrir el fichero src/main/asciidoc/index.adoc
+* Es un fichero de texto. Puedes editarlo hasta con notepad
+* Echa un ojo a https://asciidoctor.org/docs/asciidoctor-revealjs/#syntax-examples para ver lo que puedes hacer
+
+
+=== Generar
+
+* Ejecutar `./gradlew asciidoctor`
+
+=== Nada más
+
+* Tu presentación lista en `build/asciidoc/revealjs`
+
 == Presentación
 
 [%step]
@@ -21,4 +50,32 @@ ifndef::sourcedir[:sourcedir: ../java]
 * Punto 3
 
 
+== Diagramas
+
+[plantuml, diagram-class, png]
+....
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+
+== Formulas
+
+[plantuml,formulas,png]
+....
+
+:<math>int_0^1f(x)dx</math>;
+:<math>x^2+y_1+z_12^34</math>;
+note right
+Try also
+<math>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</math>
+<latex>P(y|\mathbf{x}) \mbox{ or } f(\mathbf{x})+\epsilon</latex>
+end note
+
+....
 
