@@ -1,0 +1,24 @@
+= Presentation Template: Cuando el tiempo apremia
+Jorge Aguilera <jorge.aguilera@puravida-software.com>
+2018-09-01
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+
+== Presentación
+
+[%step]
+* Quién soy
+* Qué hago.
+* Porqué lo hago.
+
+== Agenda
+
+[%step]
+* Punto 1
+* Punto 2
+* Punto 3
+
+
+

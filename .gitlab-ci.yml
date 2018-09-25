@@ -1,0 +1,22 @@
+
+build:
+ image: gradle
+ script:
+ - ./gradlew asciidoctor
+ stage: build
+ artifacts:
+  paths:
+  - build/asciidoc
+
+pages:
+  stage: deploy
+  dependencies:
+    - build
+  script:
+    - mkdir -p public
+    - cp -R build/asciidoc/revealjs/* public/
+  artifacts:
+    paths:
+    - public
+  when: manual
+
