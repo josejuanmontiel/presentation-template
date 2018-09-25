@@ -1,9 +1,9 @@
+before_script:
+  - apt-get update
+  - apt-get -y install graphviz
 
 build:
  image: gradle
- before_script:
-  - apt-get update
-  - apt-get -y install graphviz
  script:
  - ./gradlew asciidoctor
  stage: build
