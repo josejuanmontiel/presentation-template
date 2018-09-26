@@ -33,7 +33,11 @@ ifndef::sourcedir[:sourcedir: ../java]
 
 === Nada más
 
-* Tu presentación lista en `build/asciidoc/revealjs`
+* Tu presentación lista en `build/asciidoc/revealjs/index.html`
+
+== Ejemplo
+
+A continuación algunas transparencias de ejemplo
 
 == Presentación
 
@@ -49,6 +53,23 @@ ifndef::sourcedir[:sourcedir: ../java]
 * Punto 2
 * Punto 3
 
+== Notas
+
+Puedes usar notas que solo veas tú:
+
+[source]
+----
+[NOTE.speaker]
+--
+Aqui deberia hablar de mi libro.
+(pulsa s y deberias ver una ventana nueva)
+--
+----
+
+[NOTE.speaker]
+--
+Aqui deberia hablar de mi libro.
+--
 
 == Diagramas
 
@@ -78,4 +99,15 @@ Try also
 end note
 
 ....
+
+[transition=zoom, %notitle]
+== Transiciones
+
+No abuses de las transiciones y tendrás ganada a la audiencia
+
+[transition-speed=fast, %notitle]
+== Speed
+
+Aunque una transición rapidita no está mal
+
 
