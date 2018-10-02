@@ -2,8 +2,6 @@ buildscript {
     dependencies {
         classpath 'org.ysb33r.gradle:vfs-gradle-plugin:1.0'
         classpath 'commons-httpclient:commons-httpclient:3.1'
-
-        classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.8'
         classpath group: 'net.sourceforge.plantuml', name: 'plantuml', version: '1.2018.6'
         classpath group: 'org.scilab.forge', name: 'jlatexmath', version: '1.0.6'
     }
@@ -33,16 +31,21 @@ jruby {
     defaultRepositories false
 }
 
+asciidoctorj {
+  version = '1.6.0-alpha.7'
+}
+
 repositories {
     jcenter()
     maven { url 'http://rubygems-proxy.torquebox.org/releases' }
+    maven { url  "https://dl.bintray.com/puravida-software/repo" }
 }
 
 dependencies {
     gems 'rubygems:slim:3.0.8'
     gems 'rubygems:thread_safe:0.3.5'
-    compile 'org.asciidoctor:asciidoctorj:1.5.6'
-    asciidoctor 'org.asciidoctor:asciidoctorj-diagram:1.5.8'
+    asciidoctor 'com.puravida.asciidoctor:asciidoctor-barcode:1.8.1-dev.22+bdd788f'
+    asciidoctor 'org.asciidoctor:asciidoctorj-diagram:1.5.9'
 }
 
 task download {
@@ -61,10 +64,6 @@ download {
     description "Download extra revealjs resources"
     outputs.dir templateDir
     outputs.dir revealjsDir
-}
-
-asciidoctorj {
-  version = '1.5.6'
 }
 
 asciidoctor {

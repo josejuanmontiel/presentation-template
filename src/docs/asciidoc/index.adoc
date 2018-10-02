@@ -111,3 +111,10 @@ No abuses de las transiciones y tendrás ganada a la audiencia
 Aunque una transición rapidita no está mal
 
 
+== QRCode
+
+¿Quieres añadir un código a una URL para que tu audiencia pueda
+capturarlo con el móvil?
+
+barcode::qrcode[https://jorge-aguilera.gitlab.io/presentation-template/#/,300,300]
+
