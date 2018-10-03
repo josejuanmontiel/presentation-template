@@ -3,6 +3,7 @@ Jorge Aguilera <jorge.aguilera@puravida-software.com>
 2018-09-01
 :revnumber: {project-version}
 :example-caption!:
+:revealjs_theme: solarized
 :revealjs_transition: linear
 :revealjs_history: true
 :revealjs_slideNumber: true
@@ -14,6 +15,4 @@ include::fragments/1.adoc[]
 include::fragments/2.adoc[]
 
 include::fragments/ejemplo.adoc[]
-
-
 

@@ -1,0 +1,83 @@
+== Ejemplo
+
+A continuación algunas transparencias de ejemplo
+
+== Presentación
+
+[%step]
+* Quién soy
+* Qué hago.
+* Porqué lo hago.
+
+== Agenda
+
+[%step]
+* Punto 1
+* Punto 2
+* Punto 3
+
+== Notas
+
+Puedes usar notas que solo veas tú:
+
+[source]
+----
+[NOTE.speaker]
+--
+Aqui deberia hablar de mi libro.
+(pulsa s y deberias ver una ventana nueva)
+--
+----
+
+[NOTE.speaker]
+--
+Aqui deberia hablar de mi libro.
+--
+
+== Diagramas
+
+[plantuml, diagram-class, png]
+....
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+
+== Formulas
+
+[plantuml,formulas,png]
+....
+
+:<math>int_0^1f(x)dx</math>;
+:<math>x^2+y_1+z_12^34</math>;
+note right
+Try also
+<math>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</math>
+<latex>P(y|\mathbf{x}) \mbox{ or } f(\mathbf{x})+\epsilon</latex>
+end note
+
+....
+
+[transition=zoom, %notitle]
+== Transiciones
+
+No abuses de las transiciones y tendrás ganada a la audiencia
+
+[transition-speed=fast, %notitle]
+== Speed
+
+Aunque una transición rapidita no está mal
+
+
+== QRCode
+
+¿Quieres añadir un código a una URL para que tu audiencia pueda
+capturarlo con el móvil?
+
+barcode::qrcode[https://jorge-aguilera.gitlab.io/presentation-template/#/,300,300]
+

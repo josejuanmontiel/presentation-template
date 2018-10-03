@@ -1,0 +1,6 @@
+== Presentation template
+
+* Plantilla para descargar y empezar a escribir una presentación html
+* Olvidate de PowerPoint
+* Añade diagramas y/o fórmulas LaTex
+* Sólo necesitas Java (y si usas Gitlab o Github ni eso)

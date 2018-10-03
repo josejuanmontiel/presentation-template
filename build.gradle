@@ -17,6 +17,8 @@ apply plugin: 'org.ysb33r.vfs'
 apply plugin: 'java'
 apply plugin: 'org.asciidoctor.convert'
 
+import org.asciidoctor.gradle.AsciidoctorTask
+
 version = '1.0.0-SNAPSHOT'
 
 ext {
@@ -25,6 +27,7 @@ ext {
     downloadDir = new File(buildDir,'download')
     templateDir = new File(downloadDir,'templates')
     revealjsDir   = new File(downloadDir,'reveal.js')
+    sourceAdoc = project.hasProperty("ppt") ? ppt : "index.adoc"
 }
 
 jruby {
@@ -66,41 +69,39 @@ download {
     outputs.dir revealjsDir
 }
 
-asciidoctor {
-    dependsOn jrubyPrepare, download
-    sources {
-        include 'index.adoc'
-    }
-    resources {
-        from (sourceDir) {
-            include 'images/**'
+file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->  
+    task "asciidoctor_$f.name"(type:AsciidoctorTask) {
+        dependsOn jrubyPrepare, download
+        sources {
+            include f.name
         }
-    }
-    resources {
-        from ( new File(downloadDir,"reveal.js/reveal.js-${revealjsVersion}") ){
-            include "**"
+        resources {
+            from (sourceDir) {
+                include 'images/**'
+            }
         }
-        into 'reveal.js'
+        resources {
+            from ( new File(downloadDir,"reveal.js/reveal.js-${revealjsVersion}") ){
+                include "**"
+            }
+            into 'reveal.js'
+        }
+        backends 'revealjs'
+        requires 'asciidoctor-diagram'
+        requires 'tilt'
+        attributes \
+            'sourcedir': project.sourceSets.main.java.srcDirs[0],
+            'source-highlighter': 'coderay',
+            'imagesdir': './images',
+            'toc': 'left',
+            'icons': 'font',
+            'setanchors': '',
+            'idprefix': 'slide-',
+            'idseparator': '-',
+            'docinfo1': ''
+        options template_dirs: [ new File(new File(templateDir,'asciidoctor-reveal.js-1.1.3'),'templates').absolutePath]
     }
-    backends 'revealjs'
-    requires 'asciidoctor-diagram'
-    requires 'tilt'
-    attributes \
-        'build-gradle': file('build.gradle'),
-        'sourcedir': project.sourceSets.main.java.srcDirs[0],
-        'endpoint-url': 'http://example.org',
-        'source-highlighter': 'coderay',
-        'imagesdir': './images',
-        'toc': 'left',
-        'icons': 'font',
-        'setanchors': '',
-        'idprefix': 'slide-',
-        'idseparator': '-',
-        'docinfo1': '',
-        'revealjs_theme': 'black',
-        'revealjs_transition': 'linear',
-        'revealjs_history': 'true',
-        'revealjs_slideNumber': 'true'
-    options template_dirs: [ new File(new File(templateDir,'asciidoctor-reveal.js-1.1.3'),'templates').absolutePath]
+    tasks["asciidoctor_$f.name"].dependsOn download
+    build.dependsOn tasks["asciidoctor_$f.name"]
 }
-asciidoctor.dependsOn download
+
