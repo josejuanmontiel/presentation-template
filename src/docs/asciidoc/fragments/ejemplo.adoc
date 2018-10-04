@@ -36,6 +36,23 @@ Aqui deberia hablar de mi libro.
 
 == Diagramas
 
+[source]
+----
+[plantuml, diagram-class, png]
+....
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+----
+
+=== Diagram
+
 [plantuml, diagram-class, png]
 ....
 class BlockProcessor
@@ -50,9 +67,12 @@ DiagramBlock <|-- PlantUmlBlock
 
 == Formulas
 
+Escribe
+
+[source]
+----
 [plantuml,formulas,png]
 ....
-
 :<math>int_0^1f(x)dx</math>;
 :<math>x^2+y_1+z_12^34</math>;
 note right
@@ -60,7 +80,20 @@ Try also
 <math>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</math>
 <latex>P(y|\mathbf{x}) \mbox{ or } f(\mathbf{x})+\epsilon</latex>
 end note
+....
+----
 
+=== Formulas
+
+[plantuml,formulas,png]
+....
+:<math>int_0^1f(x)dx</math>;
+:<math>x^2+y_1+z_12^34</math>;
+note right
+Try also
+<math>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</math>
+<latex>P(y|\mathbf{x}) \mbox{ or } f(\mathbf{x})+\epsilon</latex>
+end note
 ....
 
 [transition=zoom, %notitle]
