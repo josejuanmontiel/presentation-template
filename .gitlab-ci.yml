@@ -3,7 +3,7 @@ before_script:
   - apt-get -y install graphviz
 
 build:
- image: java:8
+ image: openjdk:8-jdk
  script:
  - ./gradlew build
  stage: build

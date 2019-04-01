@@ -9,11 +9,18 @@ Jorge Aguilera <jorge.aguilera@puravida-software.com>
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../java]
 
-include::fragments/1.adoc[]
+== Portfolio
 
-include::fragments/2.adoc[]
+* Plantilla para descargar y empezar a escribir una presentación html
+* Olvidate de PowerPoint
+* Añade diagramas y/o fórmulas LaTex
+* Crea un Portfolio de presentaciones en un único sitio
 
-include::fragments/ejemplo.adoc[]
+== Tutorial
+
+sigue las instrucciones en link:tutorial.html[]
+
+
 
 
 

@@ -34,7 +34,20 @@ Aqui deberia hablar de mi libro.
 Aqui deberia hablar de mi libro.
 --
 
+== Código
+
+Puedes escribir código resaltado con colores:
+
+[source,groovy]
+----
+(0..10).each{
+    println "$it.- ${new Date()}"
+}
+----
+
 == Diagramas
+
+Puedes escribir bloques usando sintáxis PlantUML
 
 [source]
 ----
@@ -53,6 +66,7 @@ DiagramBlock <|-- PlantUmlBlock
 
 === Diagram
 
+.Y obtienes este diagrama
 [plantuml, diagram-class, png]
 ....
 class BlockProcessor
@@ -65,9 +79,10 @@ DiagramBlock <|-- DitaaBlock
 DiagramBlock <|-- PlantUmlBlock
 ....
 
+
 == Formulas
 
-Escribe
+Puedes escribir fórmulas dentro de los diagramas. Por ejemplo:
 
 [source]
 ----
@@ -84,6 +99,8 @@ end note
 ----
 
 === Formulas
+
+Obtienes esto
 
 [plantuml,formulas,png]
 ....
@@ -113,4 +130,6 @@ Aunque una transición rapidita no está mal
 capturarlo con el móvil?
 
 barcode::qrcode[https://jorge-aguilera.gitlab.io/presentation-template/#/,300,300]
+
+(PuraVida Software asciidoctor extension)
 

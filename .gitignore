@@ -19,4 +19,4 @@ gradle-app.setting
 /*.iml
 /credentials.properties
 
-madridgug/build/
+gradle.properties
