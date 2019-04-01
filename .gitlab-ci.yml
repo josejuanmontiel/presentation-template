@@ -9,7 +9,7 @@ build:
  stage: build
  artifacts:
   paths:
-  - build/asciidoc
+  - build/docs
 
 pages:
   stage: deploy
@@ -17,7 +17,7 @@ pages:
     - build
   script:
     - mkdir -p public
-    - cp -R build/asciidoc/revealjs/* public/
+    - cp -R build/docs/slides/* public/
   artifacts:
     paths:
     - public
