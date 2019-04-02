@@ -26,6 +26,11 @@ asciidoctorj {
 
 revealjs {
     version = '2.0.0'
+    templateGitHub {
+        organisation = 'hakimel'
+        repository = 'reveal.js'
+        tag = '3.8.0'
+    }
 }
 
 file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
