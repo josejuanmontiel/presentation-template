@@ -56,7 +56,7 @@ file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
         outputDir = { "${project.buildDir}/docs/slides" }
         sourceDir 'src/docs/asciidoc'
         sources {
-            include '*.adoc'
+            include "${name}.adoc"
         }
 
         attributes 'sourceDir': 'src/docs/asciidoc',

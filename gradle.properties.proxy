@@ -1,5 +1,0 @@
-systemProp.http.proxyHost=proxyib.ib
-systemProp.http.proxyPort=80
-
-systemProp.https.proxyHost=proxyib.ib
-systemProp.https.proxyPort=80
