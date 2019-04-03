@@ -60,27 +60,27 @@ file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
         }
 
         attributes 'sourceDir': 'src/docs/asciidoc',
-                      'groovyDir': 'src/docs/asciidoc',
-                      'imagesDir': 'images',
-                      'source-highlighter': 'coderay',
-                      'toc': 'left',
-                      'icons': 'font',
-                      'setanchors': '',
-                      'idprefix': 'slide-',
-                      'idseparator': '-',
-                      'docinfo1': ''
+                'groovyDir': 'src/docs/asciidoc',
+                'imagesDir': 'images',
+                'source-highlighter': 'coderay',
+                'toc': 'left',
+                'icons': 'font',
+                'setanchors': '',
+                'idprefix': 'slide-',
+                'idseparator': '-',
+                'docinfo1': ''
 
-        revealjsOptions{
+        revealjsOptions {
             controls = true
             slideNumber = true
             progressBar = true
-            pushToHistory=true
-            overviewMode=true
-            touchMode=true
-            backgroundTransition='convex' //none , fade, slide, convex, concave, zoom
+            pushToHistory = true
+            overviewMode = true
+            touchMode = true
+            backgroundTransition = 'convex' //none , fade, slide, convex, concave, zoom
 
-            parallaxBackgroundImage='src/docs/asciidoc/images/parallax.jpg'
-            parallaxBackgroundSize='2100px 900px'
+            parallaxBackgroundImage = 'src/docs/asciidoc/images/parallax.jpg'
+            parallaxBackgroundSize = '2100px 900px'
 
             theme = 'sky' //'black', 'beige' , 'league', 'night', 'serif', 'simple', 'sky', 'solarized'
         }
@@ -94,12 +94,16 @@ file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
             }
             into '.'
         }
+    }
 
+    task "hack_${name}"() {
+        group 'slides'
+        dependsOn tasks["$name"]
         doLast{
-            File html = file("${getOutputDirFor('revealjs')}/${name}.html")
-            File extra = file("${getOutputDirFor('revealjs')}/reveal.js/revealjs-plugins.js")
+            File html = file( "$buildDir.absolutePath/docs/slides/${name}.html")
+            File extra = file("$buildDir.absolutePath/docs/slides/reveal.js/revealjs-plugins.js")
             html.text = html.text.replace('dependencies: [', 'dependencies: ['+extra.text)
         }
     }
-    build.dependsOn tasks["${name}"]
+    build.dependsOn tasks["hack_${name}"]
 }
