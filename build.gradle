@@ -25,13 +25,22 @@ asciidoctorj {
 }
 
 revealjs {
-    version = '2.0.0'
+    //version = '2.0.0'
     templateGitHub {
         organisation = 'hakimel'
         repository = 'reveal.js'
         tag = '3.8.0'
     }
 }
+
+revealjsPlugins{
+    github 'rajgoel', {
+        organisation = 'rajgoel'
+        repository = 'reveal.js-plugins'
+        branch = 'master'
+    }
+}
+
 
 file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
 
@@ -78,6 +87,19 @@ file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
 
         toggleBuiltinPlugin 'pdf', true
         toggleBuiltinPlugin 'notes', true
+
+        resources {
+            from('src/docs/resources') {
+                include '**'
+            }
+            into '.'
+        }
+
+        doLast{
+            File html = file("${getOutputDirFor('revealjs')}/${name}.html")
+            File extra = file("${getOutputDirFor('revealjs')}/reveal.js/revealjs-plugins.js")
+            html.text = html.text.replace('dependencies: [', 'dependencies: ['+extra.text)
+        }
     }
     build.dependsOn tasks["${name}"]
 }
