@@ -25,7 +25,7 @@ asciidoctorj {
 }
 
 revealjs {
-    //version = '2.0.0'
+    version = '2.0.0'
     templateGitHub {
         organisation = 'hakimel'
         repository = 'reveal.js'
@@ -60,15 +60,10 @@ file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
         }
 
         attributes 'sourceDir': 'src/docs/asciidoc',
-                'groovyDir': 'src/docs/asciidoc',
                 'imagesDir': 'images',
+                'endpoint-url': 'https://groogle.gitlab.io/',
                 'source-highlighter': 'coderay',
-                'toc': 'left',
-                'icons': 'font',
-                'setanchors': '',
-                'idprefix': 'slide-',
-                'idseparator': '-',
-                'docinfo1': ''
+                'revealjs_plugins_configuration': file("src/docs/resources/reveal.js/plugin-configuration.js").absolutePath
 
         revealjsOptions {
             controls = true
