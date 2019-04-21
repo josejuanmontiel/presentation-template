@@ -6,9 +6,5 @@ Jorge Aguilera <jorge.aguilera@puravida-software.com>
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../java]
 
-include::{sourcedir}/fragments/1.adoc[]
-
-include::{sourcedir}/fragments/2.adoc[]
-
 include::{sourcedir}/fragments/ejemplo.adoc[]
 

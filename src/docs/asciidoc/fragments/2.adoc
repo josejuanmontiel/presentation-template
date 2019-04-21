@@ -24,4 +24,4 @@ en src/main/asciidoc
 
 === Nada más
 
-* Tu presentación lista en `build/asciidoc/revealjs/TUPRESENTACION.html`
+* Tu presentación lista en `build/docs/asciidocRevealJs/TUPRESENTACION.html`
