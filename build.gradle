@@ -2,8 +2,6 @@ plugins {
     id 'org.asciidoctor.jvm.revealjs' version '2.1.0'
 }
 
-import org.asciidoctor.gradle.jvm.slides.AsciidoctorJRevealJSTask
-
 repositories {
     jcenter()
     maven { url 'http://rubygems-proxy.torquebox.org/releases' }
@@ -15,6 +13,7 @@ configurations {
 }
 
 dependencies {
+    // Si quieres incluir un QRCode lo necesitas, si no puedes quitarlo
     asciidoctorExt 'com.puravida.asciidoctor:asciidoctor-barcode:2.0.0'
 
     // Si no vas a incluir fórmulas puedes quitarte estas dos dependencias
@@ -68,10 +67,6 @@ asciidoctorRevealJs{
         overviewMode = true
         touchMode = true
         backgroundTransition = 'convex' //none , fade, slide, convex, concave, zoom
-
-        parallaxBackgroundImage = 'src/docs/asciidoc/images/parallax.jpg'
-        parallaxBackgroundSize = '2100px 900px'
-
         theme = 'sky' //'black', 'beige' , 'league', 'night', 'serif', 'simple', 'sky', 'solarized'
     }
 
