@@ -16,9 +16,13 @@ ifndef::sourcedir[:sourcedir: ../java]
 * Añade diagramas y/o fórmulas LaTex
 * Crea un Portfolio de presentaciones en un único sitio
 
-== Tutorial
+include::{sourcedir}/fragments/1.adoc[]
 
-sigue las instrucciones en link:tutorial.html[]
+include::{sourcedir}/fragments/2.adoc[]
+
+== Ejemplo
+
+Aquí un ejemplo completo link:tutorial.html[]
 
 
 

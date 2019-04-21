@@ -1,13 +1,11 @@
 plugins {
-    id 'org.asciidoctor.jvm.revealjs' version '2.0.0'
+    id 'org.asciidoctor.jvm.revealjs' version '2.1.0'
 }
-
-import org.asciidoctor.gradle.jvm.slides.AsciidoctorJRevealJSTask
 
 repositories {
     jcenter()
     maven { url 'http://rubygems-proxy.torquebox.org/releases' }
-    maven { url  "https://dl.bintray.com/puravida-software/repo" }
+    mavenCentral()
 }
 
 configurations {
@@ -15,23 +13,25 @@ configurations {
 }
 
 dependencies {
+    // Si quieres incluir un QRCode lo necesitas, si no puedes quitarlo
     asciidoctorExt 'com.puravida.asciidoctor:asciidoctor-barcode:2.0.0'
+
+    // Si no vas a incluir fórmulas puedes quitarte estas dos dependencias
     asciidoctorExt 'net.sourceforge.plantuml:plantuml:1.2019.4'
     asciidoctorExt 'org.scilab.forge:jlatexmath:1.0.7'
 }
 
 asciidoctorj {
     diagramVersion '1.5.16'
-}
-
-revealjs {
-    version = '2.0.0'
-    templateGitHub {
-        organisation = 'hakimel'
-        repository = 'reveal.js'
-        tag = '3.8.0'
+    extensions {
+        block_macro (name: 'tweet') { parent, target, attributes ->
+            String content = """<div class="tweet" data-src="https://twitter.com/${target}/status/${attributes.get('1')}"></div>"""
+            config.remove 'content_model'
+            createBlock(parent, "pass", [content], [:], config)
+        }
     }
 }
+
 
 revealjsPlugins{
     github 'rajgoel', {
@@ -39,66 +39,46 @@ revealjsPlugins{
         repository = 'reveal.js-plugins'
         branch = 'master'
     }
+    github 'denehyg', {
+        organisation = 'denehyg'
+        repository = 'reveal.js-menu'
+        branch = 'master'
+    }
 }
 
+asciidoctorRevealJs{
 
-file('src/docs/asciidoc').eachFileMatch(~/.*.adoc/) { f ->
+    configurations 'asciidoctorExt'
 
-    String name = f.name.split('\\.').dropRight(1).join('_')
+    sourceDir 'src/docs/asciidoc'
 
-    task "${name}"(type:AsciidoctorJRevealJSTask) {
-        group 'slides'
-
-        dependsOn tasks['asciidoctorGemsPrepare']
-
-        configurations 'asciidoctorExt'
-
-        outputDir = { "${project.buildDir}/docs/slides" }
-        sourceDir 'src/docs/asciidoc'
-        sources {
-            include "${name}.adoc"
-        }
-
-        attributes 'sourceDir': 'src/docs/asciidoc',
-                'imagesDir': 'images',
-                'endpoint-url': 'https://groogle.gitlab.io/',
-                'source-highlighter': 'coderay',
-                'revealjs_plugins_configuration': file("src/docs/resources/reveal.js/plugin-configuration.js").absolutePath
-
-        revealjsOptions {
-            controls = true
-            slideNumber = true
-            progressBar = true
-            pushToHistory = true
-            overviewMode = true
-            touchMode = true
-            backgroundTransition = 'convex' //none , fade, slide, convex, concave, zoom
-
-            parallaxBackgroundImage = 'src/docs/asciidoc/images/parallax.jpg'
-            parallaxBackgroundSize = '2100px 900px'
-
-            theme = 'sky' //'black', 'beige' , 'league', 'night', 'serif', 'simple', 'sky', 'solarized'
-        }
-
-        toggleBuiltinPlugin 'pdf', true
-        toggleBuiltinPlugin 'notes', true
-
-        resources {
-            from('src/docs/resources') {
-                include '**'
-            }
-            into '.'
-        }
+    sources{
+        include '*.adoc'
     }
 
-    task "hack_${name}"() {
-        group 'slides'
-        dependsOn tasks["$name"]
-        doLast{
-            File html = file( "$buildDir.absolutePath/docs/slides/${name}.html")
-            File extra = file("$buildDir.absolutePath/docs/slides/reveal.js/revealjs-plugins.js")
-            html.text = html.text.replace('dependencies: [', 'dependencies: ['+extra.text)
-        }
+    attributes 'sourceDir': 'src/docs/asciidoc',
+            'imagesDir': 'images',
+            'icons':'font',
+            'iconfont-name': 'fontawesome-4.5.0'
+
+
+    revealjsOptions {
+        controls = true
+        slideNumber = true
+        progressBar = true
+        pushToHistory = true
+        overviewMode = true
+        touchMode = true
+        backgroundTransition = 'convex' //none , fade, slide, convex, concave, zoom
+        theme = 'sky' //'black', 'beige' , 'league', 'night', 'serif', 'simple', 'sky', 'solarized'
     }
-    build.dependsOn tasks["hack_${name}"]
+
+    plugins 'rajgoel/chart/Chart.min.js',
+            'rajgoel/chart/csv2chart.js',
+            'rajgoel/chalkboard/chalkboard.js',
+            'rajgoel/embed-tweet/embed-tweet.js',
+            'denehyg/menu.js'
+
+    pluginConfigurationFile 'src/docs/asciidoc/plugin-configuration.js'
+
 }

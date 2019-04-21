@@ -5,7 +5,7 @@ before_script:
 build:
  image: openjdk:8-jdk
  script:
- - ./gradlew build
+ - ./gradlew asciidoctorRevealJs
  stage: build
  artifacts:
   paths:
@@ -17,7 +17,7 @@ pages:
     - build
   script:
     - mkdir -p public
-    - cp -R build/docs/slides/* public/
+    - cp -R build/docs/asciidocRevealJs/* public/
   artifacts:
     paths:
     - public

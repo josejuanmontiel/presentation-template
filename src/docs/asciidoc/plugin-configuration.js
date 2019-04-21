@@ -8,7 +8,7 @@
 		markers: true,
 		custom: false,
 		themesPath: 'reveal.js/css/theme/',
-		transitions: 'Fade',
+		transitions: ['None', 'Fade', 'Slide', 'Convex', 'Concave', 'Zoom'],
 		openButton: true,
 		openSlideNumber: false,
 		keyboard: true,
@@ -33,5 +33,8 @@
 	},
 
     chalkboard: {
-		toggleChalkboardButton: { left: "130px", bottom: "30px", top: "auto", right: "auto" },
+		toggleChalkboardButton: { left: "80px" },
+        toggleNotesButton: { left: "130px" },
+        pen:  [ 'crosshair', 'pointer' ],
+        theme: "whiteboard",
 	},

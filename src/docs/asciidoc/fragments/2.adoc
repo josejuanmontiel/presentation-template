@@ -20,8 +20,8 @@ en src/main/asciidoc
 
 === Generar
 
-* Ejecutar `./gradlew build`
+* Ejecutar `./gradlew asciidocRevealJs`
 
 === Nada más
 
-* Tu presentación lista en `build/asciidoc/revealjs/TUPRESENTACION.html`
+* Tu presentación lista en `build/docs/asciidocRevealJs/TUPRESENTACION.html`
