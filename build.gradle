@@ -57,7 +57,10 @@ asciidoctorRevealJs{
     }
 
     attributes 'sourceDir': 'src/docs/asciidoc',
-            'imagesDir': 'images'
+            'imagesDir': 'images',
+            'icons':'font',
+            'iconfont-name': 'fontawesome-4.5.0'
+
 
     revealjsOptions {
         controls = true
