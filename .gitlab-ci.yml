@@ -5,7 +5,7 @@ before_script:
 build:
  image: openjdk:8-jdk
  script:
- - ./gradlew build
+ - ./gradlew asciidoctorRevealJs
  stage: build
  artifacts:
   paths:
