@@ -1,5 +1,5 @@
 plugins {
-    id 'org.asciidoctor.jvm.revealjs' version '2.1.0'
+    id 'org.asciidoctor.jvm.revealjs' version '2.2.0'
 }
 
 repositories {
@@ -22,14 +22,20 @@ dependencies {
 }
 
 asciidoctorj {
-    diagramVersion '1.5.16'
-    extensions {
+    modules{
+        diagram{
+            version '1.5.16'
+        }
+    }
+    
+    docExtensions {
         block_macro (name: 'tweet') { parent, target, attributes ->
             String content = """<div class="tweet" data-src="https://twitter.com/${target}/status/${attributes.get('1')}"></div>"""
             config.remove 'content_model'
             createBlock(parent, "pass", [content], [:], config)
         }
     }
+    
 }
 
 
@@ -59,7 +65,7 @@ asciidoctorRevealJs{
     attributes 'sourceDir': 'src/docs/asciidoc',
             'imagesDir': 'images',
             'icons':'font',
-            'iconfont-name': 'fontawesome-4.5.0'
+            'iconfont-name': 'fontawesome-5.8.0'
 
 
     revealjsOptions {
