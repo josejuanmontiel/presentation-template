@@ -34,6 +34,24 @@ asciidoctorj {
             config.remove 'content_model'
             createBlock(parent, "pass", [content], [:], config)
         }
+
+        block(name: 'spreadsheet', contexts: [':listing']) { parent, reader, attributes ->
+            def content =['<div class="spreadsheet" data-delimiter="|">']
+            content.addAll reader.readLines()
+            content.add '</div>'
+            createBlock(parent, 'pass', content, attributes, [:])
+        }
+
+        postprocessor{
+            document, output ->
+                output = output.replace("<body>","""
+                <script src="reveal.js/plugin/rajgoel/spreadsheet/ruleJS.all.full.min.js"></script>
+                <link rel="stylesheet" href="reveal.js/plugin/rajgoel/spreadsheet/spreadsheet.css">
+                <body>
+                """)
+                output
+        }
+        
     }
     
 }
@@ -83,6 +101,7 @@ asciidoctorRevealJs{
             'rajgoel/chart/csv2chart.js',
             'rajgoel/chalkboard/chalkboard.js',
             'rajgoel/embed-tweet/embed-tweet.js',
+            'rajgoel/spreadsheet/spreadsheet.js',
             'denehyg/menu.js'
 
     pluginConfigurationFile 'src/docs/asciidoc/plugin-configuration.js'
