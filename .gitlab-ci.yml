@@ -1,11 +1,9 @@
-before_script:
-  - apt-get update
-  - apt-get -y install graphviz
-
 build:
  image: openjdk:8-jdk
  script:
- - ./gradlew asciidoctorRevealJs
+   - apt-get update
+   - apt-get -y install graphviz
+   - ./gradlew asciidoctorRevealJs
  stage: build
  artifacts:
   paths:
