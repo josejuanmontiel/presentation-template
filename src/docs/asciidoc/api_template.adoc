@@ -1,0 +1,223 @@
+= (project) API documentation
+Gerson Cabrera
+2019-11-04
+:icons: font
+:toc2: left
+
+//REPLACE (project in this whole document with the name of your project)
+
+== Get started
+//replace company name with the name of your compan
+the (company name) APIs are HTTP-based RESTful, request and response bodies are formatted in JSON unless the operation's endpoint specifies otherwise.
+
+IMPORTANT: You cannot run any sample request in this guide as-is. You must replace specific parameters such as tokens or IDs with your own values.
+
+You can find definitions of common API's terms
+link:http://apiglossary.com/[here]
+
+== Authentication
+'''
+//You must explaing here how the authentication works in your api instead of adding that info on each endpoint, next section is a simple example, you will need to complete this part based on the auth of your application.
+
+We are using a JWT token that must be sent as a header on every request, you can obtain this token inside the log in response.
+
+WARNING: Watch out, not having a valid token on the request will give you a failed response with 401 UNAUTHORIZED error code
+
+== (project) overview
+//Small overview of you application should be placed here
+Small overview of you application should be placed here
+
+== Resources
+'''
+//List of all the endpoints on your api, this is a RESTful API so the structure must be resource oriented, for our sample we will use two fictional resources (superhero and villain)   
+
+=== Superhero
+//functional description of your resource
+Humans with superpowers or particularly dangerous that are registered by the goverment. All the information of each superhero is stored on our database.
+
+//Table with description of your resource's fields. the table has a custom ID to be referenced later 
+[#heroProps]
+.Superhero properties
+|===
+|Field |Type |Description |Constraints
+
+|id
+|string
+|hero identifier 
+|Required
+
+|heroAlias
+|String
+|Superhero's known name
+|Required, unique, size = 50
+
+|civilName
+|String
+|Superhero's secret identity if it's known
+|size = 50
+|===
+
+//Now it starts the list of operations for this resource, the format is HTTP METHOD + endpoint URI, note that the info of each operation is inside a collapsable created like this:
+
++++ <details><summary> +++
+GET `/superhero/{heroID}`
++++ </summary><div> +++
+
+//functional description of the operation 
+Fetch a super by it's ID
+
+//roles with access to this endpoint, you can skip this part if you don't have role's oriented security
+*Authorization*: Roles: ADMIN, HERO
+
+//default success code status
+*Response success status:* `200 OK`
+
+//a request curl in case you want to copy the URI, you can skip this part.
+.Sample Request:
+[source,http]
+----
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET localhost:8080/superhero/1
+----
+
+//a json sample of your response 
+.HTTP 200 Response model:
+[source,http]
+----
+{
+    "id": 1,
+    "heroAlias": "Batman"
+    "civilName": null
+}
+----
+
+//close the collapsable
++++ </div></details> +++
+
++++ <details><summary> +++
+POST `/superhero`
++++ </summary><div> +++
+
+This method stores a new hero on our database system.
+
+*Authorization*: Roles: ADMIN, HERO
+
+*Response success status:* `201 CREATED`
+//<<heroProps>> is a link to the resource's overview created before
+*Request body:* <<heroProps>>
+
+.Resquest body json sample
+[source,http]
+----
+{
+    "heroAlias": "Captain marvel",
+    "civilName": "Carol Danvers",
+}
+----
+
+.HTTP 201 Response model:
+[source,http,options="nowrap"]
+----
+{
+    "heroAlias": "Captain marvel",
+    "civilName": "Carol Danvers",
+}
+----
+
+//close the collapsable
++++ </div></details> +++
+
+'''
+=== Villain
+//functional description of your resource
+Criminals with superpowers or particularly dangerous that are registered on the goverment as villains. All the information of each villain is stored on our database.
+
+//Table with description of your resource's fields and a custom id to be referenced later
+[#villainProps]
+.Villain properties
+|===
+|Field |Type |Description |Constraint
+
+|id
+|string
+|villain identifier 
+|Required
+
+|villainAlias
+|String
+|villain's known name
+|Required, unique, size = 50
+
+|civilName
+|String
+|Villain's secret identity if it's known
+|size = 50
+|===
+
+//Now it starts the list of operations for this resource, the format is HTTP METHOD + endpoint URI, note that the info of each operation is inside a collapsable created like this:
+
++++ <details><summary> +++
+GET `/villain/{villainID}`
++++ </summary><div> +++
+
+//functional description of the operation 
+Fetch a villain by it's ID
+
+//roles with access to this endpoint
+*Authorization*: Roles: ADMIN, HERO
+
+//default success code status
+*Response success status:* `200 OK`
+
+//a request curl in case you want to copy the URI, you can skip this part if you don't have a testable endpoint.
+.Sample Request:
+[source,http]
+----
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET localhost:8080/villain/1
+----
+
+//a json sample of your response 
+.HTTP 200 Response model:
+[source,http]
+----
+{
+    "id": 1,
+    "villainAlias": "Joker"
+    "civilName": null
+}
+----
+
+//close the collapsable
++++ </div></details> +++
+
++++ <details><summary> +++
+POST `/villain`
++++ </summary><div> +++
+
+This method stores a new villain on our database system.
+
+*Authorization*: Roles: ADMIN, HERO
+
+*Response success status:* `201 CREATED`
+//<<villainProps>> is a link to the resource's overview created
+*Request body:* <<villainProps>>
+
+.Resquest body json sample
+[source,http]
+----
+{
+    "villainAlias": "Dr Octopus",
+    "civilName": "Otto Octavius",
+}
+----
+
+.HTTP 201 Response model:
+[source,http,options="nowrap"]
+----
+{
+    "villainAlias": "Dr Octopus",
+    "civilName": "Otto Octavius",
+}
+----
+
+//close the collapsable
++++ </div></details> +++
