@@ -88,7 +88,6 @@ revealjsPlugins{
 
 asciidoctorRevealJs{
 
-    //baseDirFollowsSourceDir()
     logDocuments true
     configurations 'asciidoctorExt'
     sources {
@@ -96,7 +95,7 @@ asciidoctorRevealJs{
     }
 
     asciidoctorj {
-        attributes 'sourceDir': 'src/docs/asciidoc',
+        attributes 'sourcedir': 'src/docs/asciidoc',
                 'imagesDir': 'images',
                 'icons': 'font',
                 'iconfont-name': 'fontawesome-5.8.0'
