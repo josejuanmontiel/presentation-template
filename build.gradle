@@ -1,5 +1,5 @@
 plugins {
-    id 'org.asciidoctor.jvm.revealjs' version '2.2.0'
+    id 'org.asciidoctor.jvm.revealjs' version '3.0.0-alpha.1'
 }
 
 repositories {
@@ -88,7 +88,7 @@ revealjsPlugins{
 
 asciidoctorRevealJs{
 
-    baseDirFollowsSourceDir()
+    //baseDirFollowsSourceDir()
     logDocuments true
     configurations 'asciidoctorExt'
     sources {
