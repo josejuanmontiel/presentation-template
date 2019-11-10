@@ -1,5 +1,5 @@
 plugins {
-    id 'org.asciidoctor.jvm.revealjs' version '2.2.0'
+    id 'org.asciidoctor.jvm.revealjs' version '3.0.0-alpha.1'
 }
 
 repositories {
@@ -13,21 +13,37 @@ configurations {
 }
 
 dependencies {
-    // Si quieres incluir un QRCode lo necesitas, si no puedes quitarlo
-    asciidoctorExt 'com.puravida.asciidoctor:asciidoctor-barcode:2.0.0'
+    asciidoctorExt group: 'com.puravida.asciidoctor', name: 'asciidoctor-barcode', version:'2.3.0'
+    asciidoctorExt group: 'net.sourceforge.plantuml', name: 'plantuml', version: '1.2019.5'
+    asciidoctorExt group: 'org.scilab.forge', name: 'jlatexmath', version: '1.0.7'
+}
 
-    // Si no vas a incluir fórmulas puedes quitarte estas dos dependencias
-    asciidoctorExt 'net.sourceforge.plantuml:plantuml:1.2019.4'
-    asciidoctorExt 'org.scilab.forge:jlatexmath:1.0.7'
+ext{
+    documentVersion = '0.0.1'
 }
 
 asciidoctorj {
+
+    version '2.0.0'
+
     modules{
         diagram{
             version '1.5.16'
         }
     }
-    
+
+    options doctype: 'book', ruby:'erubis'
+
+    attributes 'source-highlighter': 'coderay',
+            toc: '',
+            idprefix: '',
+            idseparator: '-',
+            'icons': 'font',
+            'setanchors': '',
+            'listing-caption':'',
+            version: documentVersion,
+            revnumber: documentVersion
+
     docExtensions {
         block_macro (name: 'tweet') { parent, target, attributes ->
             String content = """<div class="tweet" data-src="https://twitter.com/${target}/status/${attributes.get('1')}"></div>"""
@@ -72,19 +88,18 @@ revealjsPlugins{
 
 asciidoctorRevealJs{
 
+    logDocuments true
     configurations 'asciidoctorExt'
-
-    sourceDir 'src/docs/asciidoc'
-
-    sources{
+    sources {
         include '*.adoc'
     }
 
-    attributes 'sourceDir': 'src/docs/asciidoc',
-            'imagesDir': 'images',
-            'icons':'font',
-            'iconfont-name': 'fontawesome-5.8.0'
-
+    asciidoctorj {
+        attributes 'sourcedir': 'src/docs/asciidoc',
+                'imagesDir': 'images',
+                'icons': 'font',
+                'iconfont-name': 'fontawesome-5.8.0'
+    }
 
     revealjsOptions {
         controls = true
@@ -107,3 +122,4 @@ asciidoctorRevealJs{
     pluginConfigurationFile 'src/docs/asciidoc/plugin-configuration.js'
 
 }
+build.dependsOn asciidoctorRevealJs
